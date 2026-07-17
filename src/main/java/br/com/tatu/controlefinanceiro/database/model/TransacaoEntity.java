@@ -1,18 +1,18 @@
 package br.com.tatu.controlefinanceiro.database.model;
 import br.com.tatu.controlefinanceiro.typeEnum.Categoria;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
+@Setter
 @Builder
 @Entity
-public class transacao {
+@Table(name = "transacao")
+public class TransacaoEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transacao_id")
@@ -25,6 +25,9 @@ public class transacao {
     private double valor;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private UsuarioEntity idUsuario;
 
 
 }
